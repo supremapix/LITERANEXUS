@@ -52,8 +52,19 @@ const Footer: React.FC = () => {
           </div>
         </div>
         
-        <div className="text-center pt-8 border-t border-gray-900 text-xs text-gray-600">
+        <div className="text-center pt-8 border-t border-gray-900 text-xs text-gray-600 flex flex-col items-center gap-2">
           <p>&copy; 2026 Literanexus. Todos os direitos reservados.</p>
+          <p className="flex items-center justify-center gap-1">
+            Desenvolvido <span className="text-red-500 animate-pulse text-base">❤️</span> por 
+            <a 
+              href="https://supremasite.com.br" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="font-bold hover:text-brand-teal transition-colors ml-0.5"
+            >
+              Suprema Sites Express
+            </a>
+          </p>
         </div>
       </div>
     </footer>
