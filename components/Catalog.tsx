@@ -159,13 +159,13 @@ const Catalog: React.FC<CatalogProps> = ({ addToCart }) => {
                     </button>
 
                     {/* Left: Cover */}
-                    <div className="w-full md:w-2/5 h-64 md:h-auto bg-gray-900 relative">
+                    <div className="w-full md:w-2/5 h-64 md:h-auto bg-gray-900 relative flex-shrink-0">
                         <BookCover book={selectedBook} />
                         <div className="absolute inset-0 bg-gradient-to-t from-brand-darker to-transparent md:hidden" />
                     </div>
 
                     {/* Right: Info */}
-                    <div className="w-full md:w-3/5 p-6 md:p-8 flex flex-col overflow-y-auto">
+                    <div className="w-full md:w-3/5 p-6 md:p-8 flex flex-col overflow-y-auto relative">
                         <div className="mb-2">
                             <span className="text-brand-teal text-xs font-bold uppercase tracking-widest border border-brand-teal/30 px-2 py-1 rounded">
                                 {selectedBook.category}
@@ -200,7 +200,7 @@ const Catalog: React.FC<CatalogProps> = ({ addToCart }) => {
                         )}
 
                         {/* Social Buttons in Modal */}
-                        <div className="flex items-center gap-4 mb-6 pt-4 border-t border-white/5">
+                        <div className="flex items-center gap-4 mb-24 md:mb-6 pt-4 border-t border-white/5">
                             <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">Compartilhar:</span>
                             <div className="flex gap-2">
                                 <button onClick={(e) => shareBook(e, 'whatsapp', selectedBook)} className="p-2 rounded-full bg-white/5 hover:bg-[#25D366] hover:text-white text-gray-400 transition-all duration-300" title="WhatsApp">
@@ -218,22 +218,25 @@ const Catalog: React.FC<CatalogProps> = ({ addToCart }) => {
                             </div>
                         </div>
 
-                        <div className="mt-auto pt-4 border-t border-white/10 sticky bottom-0 bg-brand-darker/95 backdrop-blur py-4 -mb-4 md:static md:bg-transparent md:py-0 md:mb-0">
-                            <div className="flex flex-col md:flex-row items-center gap-6 justify-between">
-                                <div>
-                                    <span className="block text-xs text-gray-500 uppercase">Preço Digital</span>
-                                    <div className="flex items-baseline gap-2">
-                                        <span className="text-4xl font-bold text-white">{selectedBook.priceEUR}€</span>
-                                        <span className="text-lg text-gray-500 font-medium">/ {selectedBook.priceKZ} Kz</span>
-                                    </div>
+                        {/* Compact Sticky Footer for Mobile */}
+                        <div className="mt-auto pt-4 border-t border-white/10 sticky bottom-0 -mx-6 px-6 py-4 bg-brand-darker/95 backdrop-blur-md md:static md:bg-transparent md:mx-0 md:px-0 md:py-0 z-50">
+                            <div className="flex flex-row items-center justify-between gap-4">
+                                {/* Price Section */}
+                                <div className="flex flex-col flex-shrink-0">
+                                     <span className="text-[10px] text-gray-400 uppercase tracking-wider mb-0.5">Valor</span>
+                                     <div className="flex flex-col md:flex-row md:items-baseline md:gap-2">
+                                         <span className="text-2xl md:text-4xl font-bold text-white leading-none">{selectedBook.priceEUR}€</span>
+                                         <span className="text-xs md:text-base text-gray-500 font-medium">{selectedBook.priceKZ} Kz</span>
+                                     </div>
                                 </div>
                                 
+                                {/* Button Section */}
                                 <button 
                                     onClick={(e) => handleAddToCart(e, selectedBook)}
-                                    className="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-brand-gold to-orange-500 text-brand-darker font-black text-lg rounded-xl shadow-[0_0_25px_rgba(255,215,0,0.4)] hover:shadow-[0_0_40px_rgba(255,215,0,0.6)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 animate-pulse-glow group"
+                                    className="flex-1 md:flex-none md:w-auto px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-brand-gold to-orange-500 text-brand-darker font-bold text-sm md:text-lg rounded-xl shadow-[0_0_20px_rgba(255,215,0,0.3)] hover:shadow-[0_0_40px_rgba(255,215,0,0.6)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 animate-pulse-glow group whitespace-nowrap"
                                 >
-                                    <ShoppingBag size={22} strokeWidth={3} className="group-hover:rotate-12 transition-transform" />
-                                    ADICIONAR AGORA
+                                    <ShoppingBag size={18} strokeWidth={2.5} className="group-hover:rotate-12 transition-transform" />
+                                    <span>ADICIONAR</span>
                                 </button>
                             </div>
                         </div>
