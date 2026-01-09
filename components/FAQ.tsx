@@ -47,7 +47,8 @@ const FAQ: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-brand-darker border-t border-gray-900">
+    // Added id="faq" so the navbar link works, and scroll-mt-24 to handle fixed header overlap
+    <section id="faq" className="py-20 bg-brand-darker border-t border-gray-900 scroll-mt-24">
       <div className="container mx-auto px-4 max-w-3xl">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">Perguntas Frequentes</h2>

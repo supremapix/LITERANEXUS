@@ -21,12 +21,12 @@ const Footer: React.FC = () => {
 
           {/* Links */}
           <div>
-            <h4 className="text-white font-bold mb-4">Links Rápidos</h4>
+            <h4 className="text-white font-bold mb-4">Navegação</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="hover:text-brand-teal transition-colors">Início</a></li>
+              <li><a href="#hero" className="hover:text-brand-teal transition-colors">Início</a></li>
+              <li><a href="#benefits" className="hover:text-brand-teal transition-colors">Benefícios</a></li>
               <li><a href="#catalog" className="hover:text-brand-teal transition-colors">Catálogo</a></li>
-              <li><a href="#" className="hover:text-brand-teal transition-colors">Sobre Nós</a></li>
-              <li><a href="#" className="hover:text-brand-teal transition-colors">Política de Privacidade</a></li>
+              <li><a href="#faq" className="hover:text-brand-teal transition-colors">Perguntas Frequentes</a></li>
             </ul>
           </div>
 
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
                 <Mail size={16} /> {EMAIL_ADDRESS}
               </a>
               <div className="flex gap-4 mt-4">
-                <a href="#" className="bg-gray-800 p-2 rounded-full hover:bg-brand-purple transition-colors text-white">
+                <a href={`https://instagram.com/${INSTAGRAM_HANDLE.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="bg-gray-800 p-2 rounded-full hover:bg-brand-purple transition-colors text-white">
                   <Instagram size={20} />
                 </a>
                 <a href="#" className="bg-gray-800 p-2 rounded-full hover:bg-blue-600 transition-colors text-white">
