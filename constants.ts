@@ -18,8 +18,8 @@ export const BOOKS: Book[] = [
     category: Category.CHRISTIAN,
     priceKZ: 5000,
     priceEUR: 8.99,
-    // Using a top-down coffee cup image to match the Hero emulation vibe
     image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop',
+    description: "Experimente uma jornada diária de intimidade com Deus. Este devocional best-seller oferece 365 mensagens inspiradoras que trarão paz, direção e renovação espiritual para cada manhã do seu ano de 2026.",
     isNew: true,
     bestseller: true
   },
@@ -30,7 +30,8 @@ export const BOOKS: Book[] = [
     category: Category.CHRISTIAN,
     priceKZ: 3000,
     priceEUR: 5.99,
-    image: 'https://images.unsplash.com/photo-1524578271613-d550eacf6090?auto=format&fit=crop&q=80&w=800' // Dark vintage vibe
+    description: "Uma obra-prima da sátira cristã. C.S. Lewis imagina a correspondência entre um diabo experiente e seu sobrinho aprendiz, revelando de forma brilhante as armadilhas sutis da tentação humana.",
+    image: 'https://images.unsplash.com/photo-1524578271613-d550eacf6090?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: 'jesus-psicologo',
@@ -39,7 +40,8 @@ export const BOOKS: Book[] = [
     category: Category.CHRISTIAN,
     priceKZ: 3500,
     priceEUR: 6.50,
-    image: 'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?auto=format&fit=crop&q=80&w=800' // Intellectual/Book
+    description: "Descubra como os ensinamentos de Jesus se alinham profundamente com a psicologia moderna para curar a alma, superar traumas e encontrar equilíbrio emocional.",
+    image: 'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?auto=format&fit=crop&q=80&w=800'
   },
   
   // PSYCHOLOGY
@@ -50,7 +52,8 @@ export const BOOKS: Book[] = [
     category: Category.PSYCHOLOGY,
     priceKZ: 4000,
     priceEUR: 7.99,
-    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=800' // Brain/Focus
+    description: "Entenda a ciência por trás de como os hábitos funcionam. Aprenda a transformar sua vida, produtividade e resultados mudando padrões comportamentais fundamentais.",
+    image: 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=800'
   },
   {
     id: '5-feridas',
@@ -59,7 +62,8 @@ export const BOOKS: Book[] = [
     category: Category.PSYCHOLOGY,
     priceKZ: 3800,
     priceEUR: 6.99,
-    image: 'https://images.unsplash.com/photo-1499209974431-2761387a17ac?auto=format&fit=crop&q=80&w=800' // Peaceful/Healing
+    description: "Rejeição, abandono, humilhação, traição e injustiça. Identifique qual dessas feridas impede sua felicidade e aprenda o caminho prático para a cura interior.",
+    image: 'https://images.unsplash.com/photo-1499209974431-2761387a17ac?auto=format&fit=crop&q=80&w=800'
   },
 
   // ROMANCE
@@ -70,7 +74,8 @@ export const BOOKS: Book[] = [
     category: Category.ROMANCE,
     priceKZ: 4200,
     priceEUR: 7.50,
-    image: 'https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?auto=format&fit=crop&q=80&w=800', // Floral/Soft
+    description: "Um romance poderoso e doloroso sobre força, escolhas difíceis e a coragem necessária para quebrar ciclos de violência. Um livro que toca a alma.",
+    image: 'https://images.unsplash.com/photo-1518621736915-f3b1c41bfd00?auto=format&fit=crop&q=80&w=800',
     bestseller: true
   },
   {
@@ -80,7 +85,8 @@ export const BOOKS: Book[] = [
     category: Category.ROMANCE,
     priceKZ: 4200,
     priceEUR: 7.50,
-    image: 'https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&q=80&w=800' // Dark/Mystery
+    description: "Um thriller psicológico perturbador e viciante. Lowen Ashleigh é contratada para terminar os livros de uma autora famosa, mas descobre segredos que deveriam permanecer enterrados.",
+    image: 'https://images.unsplash.com/photo-1476275466078-4007374efbbe?auto=format&fit=crop&q=80&w=800'
   },
 
   // FINANCE
@@ -91,7 +97,8 @@ export const BOOKS: Book[] = [
     category: Category.FINANCE,
     priceKZ: 4500,
     priceEUR: 8.50,
-    image: 'https://images.unsplash.com/photo-1611974765270-ca12586343bb?auto=format&fit=crop&q=80&w=800', // Business/Graph
+    description: "O livro #1 de finanças pessoais de todos os tempos. Destrua o mito de que você precisa ter uma renda alta para enriquecer e aprenda a fazer o dinheiro trabalhar para você.",
+    image: 'https://images.unsplash.com/photo-1611974765270-ca12586343bb?auto=format&fit=crop&q=80&w=800',
     bestseller: true
   },
   {
@@ -101,7 +108,8 @@ export const BOOKS: Book[] = [
     category: Category.FINANCE,
     priceKZ: 4500,
     priceEUR: 8.50,
-    image: 'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?auto=format&fit=crop&q=80&w=800' // Money/Growth
+    description: "Aprenda a reprogramar seu modelo mental de dinheiro para o sucesso. Identifique e corrija os arquivos de riqueza em sua mente que determinam seu destino financeiro.",
+    image: 'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?auto=format&fit=crop&q=80&w=800'
   }
 ];
 

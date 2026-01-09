@@ -13,6 +13,7 @@ export interface Book {
   priceKZ: number; // Kwanza
   priceEUR: number; // Euro
   image: string;
+  description: string; // New field for detailed view
   isNew?: boolean;
   bestseller?: boolean;
 }

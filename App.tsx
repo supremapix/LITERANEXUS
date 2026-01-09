@@ -6,6 +6,8 @@ import Catalog from './components/Catalog';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
+import FloatingCart from './components/FloatingCart';
+import FloatingBuyButton from './components/FloatingBuyButton';
 import NotificationToast from './components/NotificationToast';
 import CartDrawer from './components/CartDrawer';
 import { Book } from './types';
@@ -42,7 +44,15 @@ function App() {
       
       <FAQ />
       <Footer />
+      
+      {/* Floating Buttons Stack */}
       <FloatingWhatsApp />
+      <FloatingCart 
+        itemCount={cart.length} 
+        onClick={() => setIsCartOpen(true)} 
+      />
+      <FloatingBuyButton />
+      
       <NotificationToast />
       
       <CartDrawer 
