@@ -18,7 +18,8 @@ export const BOOKS: Book[] = [
     category: Category.CHRISTIAN,
     priceKZ: 5000,
     priceEUR: 8.99,
-    image: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=800', // Coffee and book vibe
+    // Using a top-down coffee cup image to match the Hero emulation vibe
+    image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop',
     isNew: true,
     bestseller: true
   },

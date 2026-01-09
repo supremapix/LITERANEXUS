@@ -67,14 +67,14 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Hero Image / 3D Mockup */}
-        <div className="relative z-10 flex justify-center perspective-1000 lg:h-[600px] items-center">
+        {/* Hero Image / 3D Mockup - EMULATED COVER */}
+        <div className="relative z-10 flex justify-center perspective-1000 lg:h-[600px] items-center mt-12 lg:mt-0">
           <div className="relative w-64 md:w-80 lg:w-[420px] aspect-[2/3] animate-float group cursor-pointer" onClick={handleBuy}>
             
             {/* Ambient Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-brand-teal/30 to-brand-purple/30 blur-[60px] rounded-full opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-[#8B5A2B]/40 to-[#CD853F]/40 blur-[80px] rounded-full opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
             
-            {/* The Book */}
+            {/* The Book 3D Container */}
             <div 
               className="relative w-full h-full transform transition-transform duration-500 ease-out group-hover:scale-105"
               style={{
@@ -82,25 +82,85 @@ const Hero: React.FC = () => {
                 transform: 'rotateY(-15deg) rotateX(5deg)',
               }}
             >
-              {/* Spine */}
-              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gray-200 transform -translate-x-full origin-right skew-y-[20deg] brightness-75 rounded-l-sm" />
+              {/* Spine (Left side) */}
+              <div className="absolute left-0 top-0 bottom-0 w-10 bg-[#5D3A1A] transform -translate-x-full origin-right skew-y-[20deg] brightness-75 rounded-l-sm border-r border-[#3E2712]" />
               
-              {/* Pages side */}
-              <div className="absolute right-0 top-0 bottom-0 w-12 bg-white transform translate-x-[1px] rotate-y-90 origin-right flex flex-col justify-between py-2 border-l border-gray-300">
-                 {/* Page lines effect */}
-                 {[...Array(20)].map((_, i) => (
+              {/* Pages (Right side) */}
+              <div className="absolute right-0 top-0 bottom-0 w-12 bg-[#F5F5F5] transform translate-x-[1px] rotate-y-90 origin-right flex flex-col justify-between py-2 border-l border-gray-300 shadow-inner">
+                 {[...Array(25)].map((_, i) => (
                     <div key={i} className="w-full h-px bg-gray-200" />
                  ))}
               </div>
 
-              <img 
-                src={mainBook.image} 
-                alt={mainBook.title}
-                className="w-full h-full object-cover rounded-r-md rounded-l-sm shadow-[25px_25px_50px_rgba(0,0,0,0.6)] border-l border-white/20 relative z-10"
-              />
+              {/* === COVER EMULATION === */}
+              <div className="absolute inset-0 bg-gradient-to-b from-[#A06C3B] to-[#5D3A1A] rounded-r-md rounded-l-sm shadow-[10px_10px_30px_rgba(0,0,0,0.5)] flex flex-col items-center justify-between p-6 overflow-hidden border-l border-white/10">
+                
+                {/* Texture overlay */}
+                <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/leather.png')]" />
+
+                {/* Best Seller Seal */}
+                <div className="absolute top-6 right-6 z-20">
+                    <div className="relative w-20 h-20 bg-gradient-to-br from-[#CD853F] to-[#8B4513] rounded-full flex items-center justify-center shadow-lg border-2 border-[#DEB887] animate-pulse">
+                        <div className="text-center text-[#3E2712] font-bold leading-none">
+                            <span className="block text-[8px] uppercase tracking-wide">Mais de</span>
+                            <span className="block text-xl">5</span>
+                            <span className="block text-[8px] uppercase tracking-wide">Milhões</span>
+                            <span className="block text-[7px] uppercase mt-0.5 border-t border-[#3E2712] pt-0.5">Vendidos</span>
+                        </div>
+                        {/* Ribbon tail effect */}
+                        <div className="absolute -bottom-2 w-4 h-4 bg-[#5D3A1A] rotate-45 -z-10" />
+                    </div>
+                </div>
+
+                {/* Title */}
+                <div className="mt-12 text-center z-10 relative">
+                    <h2 className="text-[#3E2712] font-black text-6xl leading-[0.8] tracking-tighter mix-blend-multiply opacity-80" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        café
+                    </h2>
+                    <h3 className="text-[#3E2712] font-bold text-2xl tracking-widest my-1 opacity-90">
+                        com
+                    </h3>
+                    <h2 className="text-[#000] font-black text-7xl leading-[0.8] tracking-tighter" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        DEUS
+                    </h2>
+                    <h2 className="text-[#000] font-black text-7xl leading-[0.8] tracking-tighter" style={{ fontFamily: 'Inter, sans-serif' }}>
+                        PAI
+                    </h2>
+                    <p className="text-[#F5DEB3] text-[10px] tracking-[0.3em] uppercase mt-4 font-semibold border-t border-white/20 pt-2 inline-block">
+                        Porções Diárias de Transformação
+                    </p>
+                </div>
+
+                {/* Central Coffee Cup Image */}
+                <div className="relative w-48 h-48 rounded-full border-4 border-[#8B4513] shadow-2xl overflow-hidden z-10 my-4 group-hover:scale-110 transition-transform duration-700">
+                    <img 
+                        src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600&auto=format&fit=crop" 
+                        alt="Coffee Cup"
+                        className="w-full h-full object-cover opacity-90 sepia-[0.3]"
+                    />
+                    {/* Inner shadow for depth */}
+                    <div className="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.6)] rounded-full pointer-events-none" />
+                </div>
+
+                {/* Author Name */}
+                <div className="text-center z-10 mb-6">
+                    <p className="text-white text-sm font-bold tracking-[0.3em] uppercase">
+                        Junior Rostirola
+                    </p>
+                    <div className="w-6 h-6 mx-auto mt-3 opacity-80">
+                         {/* Simple geometric logo placeholder */}
+                        <svg viewBox="0 0 24 24" fill="white" className="w-full h-full">
+                            <path d="M12 2L2 12l10 10 10-10L12 2zm0 14l-4-4 4-4 4 4-4 4z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                {/* Lighting Sheen */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent z-20 pointer-events-none" />
+              </div>
               
-              {/* Cover Shine/Reflection */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent z-20 pointer-events-none rounded-r-md" />
+              {/* === END COVER EMULATION === */}
+
             </div>
 
             {/* Floating Price Badge */}
