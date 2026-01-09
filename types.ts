@@ -14,6 +14,7 @@ export interface Book {
   priceEUR: number; // Euro
   image: string;
   description: string; // New field for detailed view
+  benefits?: string[]; // New field for key benefits list
   isNew?: boolean;
   bestseller?: boolean;
 }

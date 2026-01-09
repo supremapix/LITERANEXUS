@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BOOKS } from '../constants';
 import { Category, Book } from '../types';
-import { BookOpen, Sparkles, Filter, Facebook, Twitter, Link2, Share2, X, ShoppingBag } from 'lucide-react';
+import { BookOpen, Sparkles, Filter, Facebook, Twitter, Link2, Share2, X, ShoppingBag, MessageCircle, CheckCircle2 } from 'lucide-react';
 import BookCover from './BookCover';
 
 interface CatalogProps {
@@ -121,9 +121,9 @@ const Catalog: React.FC<CatalogProps> = ({ addToCart }) => {
                 {/* Social Sharing */}
                 <div className="flex items-center gap-2 mb-4 pt-2 border-t border-white/5" onClick={e => e.stopPropagation()}>
                   <span className="text-[10px] text-gray-500 uppercase font-bold mr-auto">Compartilhar:</span>
-                  <button onClick={(e) => shareBook(e, 'whatsapp', book)} className="text-gray-400 hover:text-green-500 transition-colors p-1"><Share2 size={14} /></button>
-                  <button onClick={(e) => shareBook(e, 'facebook', book)} className="text-gray-400 hover:text-blue-500 transition-colors p-1"><Facebook size={14} /></button>
-                  <button onClick={(e) => shareBook(e, 'twitter', book)} className="text-gray-400 hover:text-sky-400 transition-colors p-1"><Twitter size={14} /></button>
+                  <button onClick={(e) => shareBook(e, 'whatsapp', book)} className="text-gray-400 hover:text-green-500 transition-colors p-1" title="WhatsApp"><MessageCircle size={14} /></button>
+                  <button onClick={(e) => shareBook(e, 'facebook', book)} className="text-gray-400 hover:text-blue-500 transition-colors p-1" title="Facebook"><Facebook size={14} /></button>
+                  <button onClick={(e) => shareBook(e, 'twitter', book)} className="text-gray-400 hover:text-sky-400 transition-colors p-1" title="Twitter"><Twitter size={14} /></button>
                 </div>
                 
                 <div className="mt-auto space-y-4">
@@ -150,7 +150,7 @@ const Catalog: React.FC<CatalogProps> = ({ addToCart }) => {
             <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                 <div className="absolute inset-0 bg-black/80 backdrop-blur-md" onClick={() => setSelectedBook(null)} />
                 
-                <div className="relative w-full max-w-4xl bg-brand-darker border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-[scaleIn_0.3s_ease-out]">
+                <div className="relative w-full max-w-5xl bg-brand-darker border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row animate-[scaleIn_0.3s_ease-out] max-h-[90vh]">
                     <button 
                         onClick={() => setSelectedBook(null)}
                         className="absolute top-4 right-4 z-50 p-2 bg-black/50 rounded-full text-white hover:bg-white hover:text-black transition-colors"
@@ -159,12 +159,13 @@ const Catalog: React.FC<CatalogProps> = ({ addToCart }) => {
                     </button>
 
                     {/* Left: Cover */}
-                    <div className="w-full md:w-2/5 aspect-[2/3] md:aspect-auto bg-gray-900 relative">
+                    <div className="w-full md:w-2/5 h-64 md:h-auto bg-gray-900 relative">
                         <BookCover book={selectedBook} />
+                        <div className="absolute inset-0 bg-gradient-to-t from-brand-darker to-transparent md:hidden" />
                     </div>
 
                     {/* Right: Info */}
-                    <div className="w-full md:w-3/5 p-8 flex flex-col overflow-y-auto max-h-[60vh] md:max-h-full">
+                    <div className="w-full md:w-3/5 p-6 md:p-8 flex flex-col overflow-y-auto">
                         <div className="mb-2">
                             <span className="text-brand-teal text-xs font-bold uppercase tracking-widest border border-brand-teal/30 px-2 py-1 rounded">
                                 {selectedBook.category}
@@ -176,13 +177,48 @@ const Catalog: React.FC<CatalogProps> = ({ addToCart }) => {
                         </h2>
                         <p className="text-gray-400 font-medium text-lg mb-6">por {selectedBook.author}</p>
                         
-                        <div className="w-20 h-1 bg-brand-gold mb-6" />
-                        
-                        <div className="prose prose-invert prose-sm mb-8 text-gray-300 leading-relaxed">
+                        <div className="prose prose-invert prose-sm mb-6 text-gray-300 leading-relaxed">
                             <p>{selectedBook.description}</p>
                         </div>
 
-                        <div className="mt-auto pt-6 border-t border-white/10">
+                        {/* EXPANDED BENEFITS SECTION */}
+                        {selectedBook.benefits && selectedBook.benefits.length > 0 && (
+                          <div className="mb-8 bg-brand-card/30 rounded-xl p-5 border border-white/5">
+                            <h4 className="text-white font-bold mb-4 flex items-center gap-2 uppercase text-sm tracking-wider">
+                              <Sparkles className="text-brand-gold w-4 h-4" />
+                              O que você vai descobrir:
+                            </h4>
+                            <ul className="grid grid-cols-1 gap-3">
+                              {selectedBook.benefits.map((benefit, idx) => (
+                                <li key={idx} className="flex items-start gap-3 text-gray-300 text-sm leading-snug group">
+                                  <CheckCircle2 className="text-brand-teal w-5 h-5 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                                  <span className="group-hover:text-white transition-colors">{benefit}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        )}
+
+                        {/* Social Buttons in Modal */}
+                        <div className="flex items-center gap-4 mb-6 pt-4 border-t border-white/5">
+                            <span className="text-xs text-gray-500 font-bold uppercase tracking-wider">Compartilhar:</span>
+                            <div className="flex gap-2">
+                                <button onClick={(e) => shareBook(e, 'whatsapp', selectedBook)} className="p-2 rounded-full bg-white/5 hover:bg-[#25D366] hover:text-white text-gray-400 transition-all duration-300" title="WhatsApp">
+                                    <MessageCircle size={16} />
+                                </button>
+                                <button onClick={(e) => shareBook(e, 'facebook', selectedBook)} className="p-2 rounded-full bg-white/5 hover:bg-[#1877F2] hover:text-white text-gray-400 transition-all duration-300" title="Facebook">
+                                    <Facebook size={16} />
+                                </button>
+                                <button onClick={(e) => shareBook(e, 'twitter', selectedBook)} className="p-2 rounded-full bg-white/5 hover:bg-[#1DA1F2] hover:text-white text-gray-400 transition-all duration-300" title="Twitter">
+                                    <Twitter size={16} />
+                                </button>
+                                <button onClick={(e) => shareBook(e, 'copy', selectedBook)} className="p-2 rounded-full bg-white/5 hover:bg-gray-600 hover:text-white text-gray-400 transition-all duration-300" title="Copiar Link">
+                                    <Link2 size={16} />
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="mt-auto pt-4 border-t border-white/10 sticky bottom-0 bg-brand-darker/95 backdrop-blur py-4 -mb-4 md:static md:bg-transparent md:py-0 md:mb-0">
                             <div className="flex flex-col md:flex-row items-center gap-6 justify-between">
                                 <div>
                                     <span className="block text-xs text-gray-500 uppercase">Preço Digital</span>
@@ -194,10 +230,10 @@ const Catalog: React.FC<CatalogProps> = ({ addToCart }) => {
                                 
                                 <button 
                                     onClick={(e) => handleAddToCart(e, selectedBook)}
-                                    className="w-full md:w-auto px-8 py-4 bg-brand-gold hover:bg-white text-brand-darker font-bold text-lg rounded-xl shadow-[0_0_20px_rgba(255,215,0,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all duration-300 flex items-center justify-center gap-3 animate-pulse-glow"
+                                    className="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-brand-gold to-orange-500 text-brand-darker font-black text-lg rounded-xl shadow-[0_0_25px_rgba(255,215,0,0.4)] hover:shadow-[0_0_40px_rgba(255,215,0,0.6)] hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 animate-pulse-glow group"
                                 >
-                                    <ShoppingBag size={20} strokeWidth={2.5} />
-                                    ADICIONAR AO CARRINHO
+                                    <ShoppingBag size={22} strokeWidth={3} className="group-hover:rotate-12 transition-transform" />
+                                    ADICIONAR AGORA
                                 </button>
                             </div>
                         </div>
