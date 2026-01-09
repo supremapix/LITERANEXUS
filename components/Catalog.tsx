@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { BOOKS, WHATSAPP_NUMBER } from '../constants';
 import { Category, Book } from '../types';
-import PremiumButton from './PremiumButton';
 import { BookOpen, Sparkles, Filter } from 'lucide-react';
+import BookCover from './BookCover';
 
 const Catalog: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<Category | 'Todos'>('Todos');
@@ -61,32 +61,28 @@ const Catalog: React.FC = () => {
               className="group relative bg-brand-card/30 backdrop-blur-sm border border-white/5 rounded-2xl overflow-hidden hover:border-brand-teal/40 transition-all duration-500 hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)] flex flex-col"
             >
               
-              {/* Image Area */}
-              <div className="relative aspect-[3/4] overflow-hidden bg-gray-900">
-                <img 
-                  src={book.image} 
-                  alt={book.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
-                  loading="lazy"
-                />
+              {/* Cover Area (Replaces Image) */}
+              <div className="relative aspect-[2/3] overflow-hidden bg-gray-900 shadow-inner">
+                {/* Visual Emulation Component */}
+                <BookCover book={book} />
                 
                 {book.bestseller && (
-                  <div className="absolute top-0 right-0 bg-brand-gold/90 backdrop-blur text-brand-darker text-[10px] font-bold px-3 py-1.5 rounded-bl-xl shadow-lg flex items-center gap-1 z-10">
+                  <div className="absolute top-0 right-0 bg-brand-gold/90 backdrop-blur text-brand-darker text-[10px] font-bold px-3 py-1.5 rounded-bl-xl shadow-lg flex items-center gap-1 z-30">
                     <Sparkles size={10} /> BESTSELLER
                   </div>
                 )}
 
-                {/* Overlay gradient for text readability at bottom */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-card via-transparent to-transparent opacity-90" />
+                {/* Overlay gradient for hover effect */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 z-20 pointer-events-none" />
                 
                 {/* Floating Category Tag */}
-                <div className="absolute top-4 left-4 bg-black/40 backdrop-blur-md border border-white/10 text-brand-teal text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                <div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md border border-white/10 text-brand-teal text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider z-30">
                   {book.category.split('&')[0]}
                 </div>
               </div>
 
-              {/* Content Area - Floating over image or separate? Using overlay style for modern look */}
-              <div className="relative p-6 flex flex-col flex-grow -mt-20">
+              {/* Content Area */}
+              <div className="relative p-6 flex flex-col flex-grow bg-gradient-to-b from-brand-card/50 to-brand-card/80">
                 <div className="mb-4">
                     <h3 className="text-xl font-bold text-white mb-1 leading-tight line-clamp-2 min-h-[3.2rem] group-hover:text-brand-teal transition-colors">
                         {book.title}
