@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { BOOKS, WHATSAPP_NUMBER } from '../constants';
+import { BOOKS } from '../constants';
 import { Category, Book } from '../types';
-import { BookOpen, Sparkles, Filter } from 'lucide-react';
+import { BookOpen, Sparkles, Filter, Facebook, Twitter, Link2, Share2 } from 'lucide-react';
 import BookCover from './BookCover';
 
-const Catalog: React.FC = () => {
+interface CatalogProps {
+  addToCart: (book: Book) => void;
+}
+
+const Catalog: React.FC<CatalogProps> = ({ addToCart }) => {
   const [activeCategory, setActiveCategory] = useState<Category | 'Todos'>('Todos');
 
   const categories = ['Todos', ...Object.values(Category)];
@@ -13,9 +17,25 @@ const Catalog: React.FC = () => {
     ? BOOKS 
     : BOOKS.filter(book => book.category === activeCategory);
 
-  const handlePurchase = (book: Book) => {
-    const message = `Olá Literanexus! Gostaria de comprar o livro digital: *${book.title}* por ${book.priceEUR}€ / ${book.priceKZ}kz.`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER.replace('+', '')}?text=${encodeURIComponent(message)}`, '_blank');
+  const shareBook = (platform: 'whatsapp' | 'facebook' | 'twitter' | 'copy', book: Book) => {
+    const url = window.location.href; // In a real app, this would be the specific book URL
+    const text = `Confira o livro "${book.title}" na Literanexus!`;
+    
+    switch (platform) {
+      case 'whatsapp':
+        window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + url)}`, '_blank');
+        break;
+      case 'facebook':
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+        break;
+      case 'twitter':
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+        break;
+      case 'copy':
+        navigator.clipboard.writeText(`${text} ${url}`);
+        alert('Link copiado!');
+        break;
+    }
   };
 
   return (
@@ -89,6 +109,23 @@ const Catalog: React.FC = () => {
                     </h3>
                     <p className="text-gray-400 text-sm font-medium">{book.author}</p>
                 </div>
+
+                {/* Social Sharing Row */}
+                <div className="flex items-center gap-2 mb-4 pt-2 border-t border-white/5">
+                  <span className="text-[10px] text-gray-500 uppercase font-bold mr-auto">Compartilhar:</span>
+                  <button onClick={() => shareBook('whatsapp', book)} className="text-gray-400 hover:text-green-500 transition-colors p-1" title="WhatsApp">
+                    <Share2 size={14} />
+                  </button>
+                  <button onClick={() => shareBook('facebook', book)} className="text-gray-400 hover:text-blue-500 transition-colors p-1" title="Facebook">
+                    <Facebook size={14} />
+                  </button>
+                  <button onClick={() => shareBook('twitter', book)} className="text-gray-400 hover:text-sky-400 transition-colors p-1" title="X (Twitter)">
+                    <Twitter size={14} />
+                  </button>
+                  <button onClick={() => shareBook('copy', book)} className="text-gray-400 hover:text-white transition-colors p-1" title="Copiar Link">
+                    <Link2 size={14} />
+                  </button>
+                </div>
                 
                 <div className="mt-auto space-y-4">
                   <div className="flex items-end gap-2">
@@ -97,7 +134,7 @@ const Catalog: React.FC = () => {
                   </div>
                   
                   <button 
-                    onClick={() => handlePurchase(book)}
+                    onClick={() => addToCart(book)}
                     className="w-full py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-brand-teal hover:border-brand-teal hover:text-brand-darker text-white font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 group-hover:shadow-[0_0_15px_rgba(0,206,209,0.2)]"
                   >
                     <span>ADICIONAR</span>

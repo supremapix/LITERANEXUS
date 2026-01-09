@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { BookOpen, Menu, X } from 'lucide-react';
+import { BookOpen, Menu, X, ShoppingCart } from 'lucide-react';
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  cartCount?: number;
+  onOpenCart?: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ cartCount = 0, onOpenCart }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -40,18 +45,46 @@ const Navbar: React.FC = () => {
           <button onClick={() => scrollTo('catalog')} className="text-sm font-medium text-gray-300 hover:text-brand-teal transition-colors">Catálogo</button>
           <button onClick={() => scrollTo('faq')} className="text-sm font-medium text-gray-300 hover:text-brand-teal transition-colors">FAQ</button>
           
-          <button 
-            onClick={() => scrollTo('catalog')}
-            className="px-5 py-2 rounded-full bg-brand-teal/10 border border-brand-teal/50 text-brand-teal text-sm font-bold hover:bg-brand-teal hover:text-brand-darker transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,206,209,0.4)]"
-          >
-            COMPRAR AGORA
-          </button>
+          <div className="flex items-center gap-4 border-l border-white/10 pl-6">
+            <button 
+              onClick={onOpenCart}
+              className="relative p-2 text-gray-300 hover:text-brand-teal transition-colors group"
+            >
+              <ShoppingCart className="w-6 h-6" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-brand-gold text-brand-darker text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full animate-bounce">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+            
+            <button 
+              onClick={() => scrollTo('catalog')}
+              className="px-5 py-2 rounded-full bg-brand-teal/10 border border-brand-teal/50 text-brand-teal text-sm font-bold hover:bg-brand-teal hover:text-brand-darker transition-all duration-300 hover:shadow-[0_0_15px_rgba(0,206,209,0.4)]"
+            >
+              LOJA
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button className="md:hidden text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-          {mobileMenuOpen ? <X /> : <Menu />}
-        </button>
+        {/* Mobile Actions */}
+        <div className="flex items-center gap-4 md:hidden">
+            <button 
+              onClick={onOpenCart}
+              className="relative p-2 text-white"
+            >
+              <ShoppingCart className="w-6 h-6" />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-brand-gold text-brand-darker text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full">
+                  {cartCount}
+                </span>
+              )}
+            </button>
+            
+            <button className="text-white" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              {mobileMenuOpen ? <X /> : <Menu />}
+            </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
